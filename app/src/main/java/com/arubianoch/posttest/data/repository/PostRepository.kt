@@ -25,4 +25,6 @@ interface PostRepository {
     suspend fun getComments(postId: String): LiveData<List<Comment>>
 
     suspend fun getUser(postId: String): LiveData<User>
+
+    suspend fun deleteAllInfo()
 }

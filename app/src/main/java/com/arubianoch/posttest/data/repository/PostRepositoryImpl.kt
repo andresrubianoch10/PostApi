@@ -133,4 +133,12 @@ class PostRepositoryImpl(
             userDao.upsert(user)
         }
     }
+
+    override suspend fun deleteAllInfo() {
+        GlobalScope.launch(Dispatchers.IO) {
+            userDao.deleteAllUsers()
+            commentDao.deleteAllComments()
+            postDao.deleteAllPost()
+        }
+    }
 }
