@@ -3,6 +3,7 @@ package com.arubianoch.posttest.data.network
 import com.arubianoch.posttest.data.network.connectivity.ConnectivityInterceptor
 import com.arubianoch.posttest.data.network.response.Comment
 import com.arubianoch.posttest.data.network.response.Post
+import com.arubianoch.posttest.data.network.response.User
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -24,6 +25,9 @@ interface ApiPostService {
     fun getCommentsByPostId(
         @Query("postId") postId: String
     ): Deferred<List<Comment>>
+
+    @GET("/users")
+    fun getUserInfo(): Deferred<List<User>>
 
     companion object {
         operator fun invoke(

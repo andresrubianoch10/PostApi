@@ -3,10 +3,13 @@ package com.arubianoch.posttest.data.repository
 import androidx.lifecycle.LiveData
 import com.arubianoch.posttest.data.db.dao.CommentDao
 import com.arubianoch.posttest.data.db.dao.PostDao
+import com.arubianoch.posttest.data.db.dao.UserDao
 import com.arubianoch.posttest.data.network.dataSource.comment.CommentDataSource
 import com.arubianoch.posttest.data.network.dataSource.post.PostDataSource
+import com.arubianoch.posttest.data.network.dataSource.user.UserDataSource
 import com.arubianoch.posttest.data.network.response.Comment
 import com.arubianoch.posttest.data.network.response.Post
+import com.arubianoch.posttest.data.network.response.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -19,8 +22,10 @@ import org.threeten.bp.ZonedDateTime
 class PostRepositoryImpl(
     private val postDao: PostDao,
     private val commentDao: CommentDao,
+    private val userDao: UserDao,
     private val postDataSource: PostDataSource,
-    private val commentDataSource: CommentDataSource
+    private val commentDataSource: CommentDataSource,
+    private val userDataSource: UserDataSource
     ) : PostRepository {
 
     private var lastFetchedTime: ZonedDateTime? = null
@@ -35,6 +40,12 @@ class PostRepositoryImpl(
         commentDataSource.apply {
             downloadComment.observeForever {
                 persistFetchedComments(it)
+            }
+        }
+
+        userDataSource.apply {
+            downloadedUser.observeForever { user ->
+                persistFetchedUser(user)
             }
         }
     }
@@ -103,6 +114,23 @@ class PostRepositoryImpl(
     private fun persistFetchedComments(comments: List<Comment>) {
         GlobalScope.launch(Dispatchers.IO) {
             commentDao.upsert(comments)
+        }
+    }
+
+    override suspend fun getUser(postId: String): LiveData<User> {
+        return withContext(Dispatchers.IO) {
+            fetchUserById()
+            return@withContext userDao.getUserById(postId)
+        }
+    }
+
+    private suspend fun fetchUserById() {
+        userDataSource.fetchUser()
+    }
+
+    private fun persistFetchedUser(user: List<User>) {
+        GlobalScope.launch(Dispatchers.IO) {
+            userDao.upsert(user)
         }
     }
 }
