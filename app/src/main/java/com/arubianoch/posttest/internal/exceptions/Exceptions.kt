@@ -1,4 +1,4 @@
-package com.arubianoch.posttest.internal
+package com.arubianoch.posttest.internal.exceptions
 
 import java.io.IOException
 

@@ -2,7 +2,7 @@ package com.arubianoch.posttest.data.network.connectivity
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.arubianoch.posttest.internal.NoConnectivityException
+import com.arubianoch.posttest.internal.exceptions.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response
 
