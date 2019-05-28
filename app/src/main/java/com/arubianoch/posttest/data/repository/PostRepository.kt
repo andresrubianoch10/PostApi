@@ -1,4 +1,4 @@
-package com.arubianoch.posttest
+package com.arubianoch.posttest.data.repository
 
 import androidx.lifecycle.LiveData
 import com.arubianoch.posttest.data.network.response.Post
