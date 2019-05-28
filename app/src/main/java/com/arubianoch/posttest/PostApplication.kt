@@ -13,7 +13,10 @@ import com.arubianoch.posttest.data.network.dataSource.user.UserDataSource
 import com.arubianoch.posttest.data.network.dataSource.user.UserDataSourceImpl
 import com.arubianoch.posttest.data.repository.PostRepository
 import com.arubianoch.posttest.data.repository.PostRepositoryImpl
+import com.arubianoch.posttest.ui.comments.CommentViewModelFactory
 import com.arubianoch.posttest.ui.post.PostViewModelFactory
+import com.arubianoch.posttest.ui.user.UserViewModelFactory
+import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -59,5 +62,12 @@ class PostsApplication : Application(), KodeinAware {
             )
         }
         bind() from provider { PostViewModelFactory(instance()) }
+        bind() from factory { postId: String -> CommentViewModelFactory(instance(), postId) }
+        bind() from factory { postId: String -> UserViewModelFactory(instance(), postId) }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        AndroidThreeTen.init(this)
     }
 }
