@@ -13,6 +13,7 @@ import com.arubianoch.posttest.data.network.dataSource.user.UserDataSource
 import com.arubianoch.posttest.data.network.dataSource.user.UserDataSourceImpl
 import com.arubianoch.posttest.data.repository.PostRepository
 import com.arubianoch.posttest.data.repository.PostRepositoryImpl
+import com.arubianoch.posttest.ui.post.PostViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -57,5 +58,6 @@ class PostsApplication : Application(), KodeinAware {
                 instance()
             )
         }
+        bind() from provider { PostViewModelFactory(instance()) }
     }
 }
