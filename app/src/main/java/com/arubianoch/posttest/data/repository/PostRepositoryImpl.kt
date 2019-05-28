@@ -9,6 +9,7 @@ import com.arubianoch.posttest.data.network.dataSource.post.PostDataSource
 import com.arubianoch.posttest.data.network.dataSource.user.UserDataSource
 import com.arubianoch.posttest.data.network.response.Comment
 import com.arubianoch.posttest.data.network.response.Post
+import com.arubianoch.posttest.data.network.response.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -107,6 +108,23 @@ class PostRepositoryImpl(
     private fun persistFetchedComments(comments: List<Comment>) {
         GlobalScope.launch(Dispatchers.IO) {
             commentDao.upsert(comments)
+        }
+    }
+
+    override suspend fun getUser(postId: String): LiveData<User> {
+        return withContext(Dispatchers.IO) {
+            fetchUserById()
+            return@withContext userDao.getUserById(postId)
+        }
+    }
+
+    private suspend fun fetchUserById() {
+        userDataSource.fetchUser()
+    }
+
+    private fun persistFetchedUser(user: List<User>) {
+        GlobalScope.launch(Dispatchers.IO) {
+            userDao.upsert(user)
         }
     }
 }

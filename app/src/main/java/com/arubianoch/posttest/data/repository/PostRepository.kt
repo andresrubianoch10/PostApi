@@ -3,6 +3,7 @@ package com.arubianoch.posttest.data.repository
 import androidx.lifecycle.LiveData
 import com.arubianoch.posttest.data.network.response.Comment
 import com.arubianoch.posttest.data.network.response.Post
+import com.arubianoch.posttest.data.network.response.User
 
 /**
  * @author Andres Rubiano Del Chiaro
@@ -22,4 +23,6 @@ interface PostRepository {
     suspend fun deletePostById(postId: String)
 
     suspend fun getComments(postId: String): LiveData<List<Comment>>
+
+    suspend fun getUser(postId: String): LiveData<User>
 }
