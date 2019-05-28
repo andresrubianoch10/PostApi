@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.arubianoch.posttest.data.network.ApiPostService
 import com.arubianoch.posttest.data.network.response.Post
-import com.arubianoch.posttest.internal.NoConnectivityException
+import com.arubianoch.posttest.internal.exceptions.NoConnectivityException
 
 /**
  * @author Andres Rubiano Del Chiaro
