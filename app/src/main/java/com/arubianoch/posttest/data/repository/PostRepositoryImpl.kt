@@ -3,8 +3,10 @@ package com.arubianoch.posttest.data.repository
 import androidx.lifecycle.LiveData
 import com.arubianoch.posttest.data.db.dao.CommentDao
 import com.arubianoch.posttest.data.db.dao.PostDao
+import com.arubianoch.posttest.data.db.dao.UserDao
 import com.arubianoch.posttest.data.network.dataSource.comment.CommentDataSource
 import com.arubianoch.posttest.data.network.dataSource.post.PostDataSource
+import com.arubianoch.posttest.data.network.dataSource.user.UserDataSource
 import com.arubianoch.posttest.data.network.response.Comment
 import com.arubianoch.posttest.data.network.response.Post
 import kotlinx.coroutines.Dispatchers
@@ -19,8 +21,10 @@ import org.threeten.bp.ZonedDateTime
 class PostRepositoryImpl(
     private val postDao: PostDao,
     private val commentDao: CommentDao,
+    private val userDao: UserDao,
     private val postDataSource: PostDataSource,
-    private val commentDataSource: CommentDataSource
+    private val commentDataSource: CommentDataSource,
+    private val userDataSource: UserDataSource
     ) : PostRepository {
 
     private var lastFetchedTime: ZonedDateTime? = null
