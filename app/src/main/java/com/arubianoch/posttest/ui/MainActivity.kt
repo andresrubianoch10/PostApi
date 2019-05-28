@@ -1,7 +1,8 @@
-package com.arubianoch.posttest
+package com.arubianoch.posttest.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.arubianoch.posttest.R
 
 class MainActivity : AppCompatActivity() {
 
