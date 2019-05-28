@@ -42,6 +42,12 @@ class PostRepositoryImpl(
                 persistFetchedComments(it)
             }
         }
+
+        userDataSource.apply {
+            downloadedUser.observeForever { user ->
+                persistFetchedUser(user)
+            }
+        }
     }
 
     override suspend fun getPosts(): LiveData<List<Post>> {
