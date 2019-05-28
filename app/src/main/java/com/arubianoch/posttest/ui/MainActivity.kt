@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -169,6 +170,8 @@ class MainActivity : ScopedActivity(), KodeinAware, PostAdapter.OnItemClickListe
         override fun getCount(): Int {
             return 2
         }
+
+
     }
 
     override fun onItemClicked(itemView: Post) {
@@ -188,5 +191,13 @@ class MainActivity : ScopedActivity(), KodeinAware, PostAdapter.OnItemClickListe
             .commit()
 
         showContainerDetail()
+    }
+
+    override fun onBackPressed() {
+        //TODO() Added time validation to know if data needs to be refetched
+        if (containerDetail.isVisible) {
+            menuClick()
+            showRefreshIcon()
+        }
     }
 }

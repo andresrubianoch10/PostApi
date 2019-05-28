@@ -66,8 +66,10 @@ class PostsFragment : ScopedFragment(), KodeinAware {
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ) {
-            override fun onMove(@NonNull recyclerView: RecyclerView, @NonNull viewHolder: RecyclerView.ViewHolder,
-                                @NonNull viewHolder1: RecyclerView.ViewHolder): Boolean {
+            override fun onMove(
+                @NonNull recyclerView: RecyclerView, @NonNull viewHolder: RecyclerView.ViewHolder,
+                @NonNull viewHolder1: RecyclerView.ViewHolder
+            ): Boolean {
                 return false
             }
 
@@ -120,7 +122,5 @@ class PostsFragment : ScopedFragment(), KodeinAware {
             }
         })
     }
-
-
 
 }
