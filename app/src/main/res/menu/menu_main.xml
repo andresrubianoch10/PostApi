@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.arubianoch.test.ui.MainActivity">
+
+    <item android:id="@+id/action_settings"
+          android:title="@string/action_settings"
+          android:orderInCategory="100"
+          android:icon="@drawable/ic_sync_black_24dp"
+          android:visible="true"
+          app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/empty_star"
+          android:title="@string/action_settings"
+          android:orderInCategory="100"
+          android:icon="@drawable/ic_star_border_black_24dp"
+          android:visible="false"
+          app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/full_star"
+          android:title="@string/action_settings"
+          android:orderInCategory="100"
+          android:visible="false"
+          android:icon="@drawable/ic_star_black_24dp"
+          app:showAsAction="ifRoom"/>
+</menu>
