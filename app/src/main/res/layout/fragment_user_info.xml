@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="16dp">
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text="@string/userTitle"
+              android:textStyle="bold"
+              android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
+
+    <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userNameText"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+            android:layout_marginTop="6dp"
+            tools:text="Name: Andres Rubiano Del Chiaro"/>
+
+    <TextView
+            android:id="@+id/userEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+            tools:text="Email: andres.rubiano.ch@gmail.com"
+            android:layout_marginTop="6dp"
+            android:text="@string/userEmailText"/>
+
+    <TextView
+            android:id="@+id/userPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userPhoneText"
+            android:layout_marginTop="6dp"
+            tools:text="Phone: (304) 593 5556"/>
+
+    <TextView
+            android:id="@+id/userWebsite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/userWebsiteText"
+            android:layout_marginTop="6dp"
+            tools:text="Website: https:www.andresrubianoch.com"/>
+</LinearLayout>
