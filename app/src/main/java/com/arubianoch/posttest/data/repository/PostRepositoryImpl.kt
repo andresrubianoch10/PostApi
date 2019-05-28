@@ -1,8 +1,11 @@
 package com.arubianoch.posttest.data.repository
 
 import androidx.lifecycle.LiveData
+import com.arubianoch.posttest.data.db.dao.CommentDao
 import com.arubianoch.posttest.data.db.dao.PostDao
+import com.arubianoch.posttest.data.network.dataSource.comment.CommentDataSource
 import com.arubianoch.posttest.data.network.dataSource.post.PostDataSource
+import com.arubianoch.posttest.data.network.response.Comment
 import com.arubianoch.posttest.data.network.response.Post
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -15,8 +18,10 @@ import org.threeten.bp.ZonedDateTime
  */
 class PostRepositoryImpl(
     private val postDao: PostDao,
-    private val postDataSource: PostDataSource
-) : PostRepository {
+    private val commentDao: CommentDao,
+    private val postDataSource: PostDataSource,
+    private val commentDataSource: CommentDataSource
+    ) : PostRepository {
 
     private var lastFetchedTime: ZonedDateTime? = null
 
@@ -24,6 +29,12 @@ class PostRepositoryImpl(
         postDataSource.apply {
             downloadedPost.observeForever { allPost ->
                 persistFetchedPost(allPost)
+            }
+        }
+
+        commentDataSource.apply {
+            downloadComment.observeForever {
+                persistFetchedComments(it)
             }
         }
     }
@@ -75,6 +86,23 @@ class PostRepositoryImpl(
     override suspend fun deletePostById(postId: String) {
         GlobalScope.launch(Dispatchers.IO) {
             postDao.deletePostById(postId)
+        }
+    }
+
+    override suspend fun getComments(postId: String): LiveData<List<Comment>> {
+        return withContext(Dispatchers.IO) {
+            fetchCommentsById(postId)
+            return@withContext commentDao.getComment(postId)
+        }
+    }
+
+    private suspend fun fetchCommentsById(postId: String) {
+        commentDataSource.fetchComment(postId)
+    }
+
+    private fun persistFetchedComments(comments: List<Comment>) {
+        GlobalScope.launch(Dispatchers.IO) {
+            commentDao.upsert(comments)
         }
     }
 }
