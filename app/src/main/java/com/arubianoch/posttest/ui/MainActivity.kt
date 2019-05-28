@@ -194,6 +194,7 @@ class MainActivity : ScopedActivity(), KodeinAware, PostAdapter.OnItemClickListe
     }
 
     override fun onBackPressed() {
+        //TODO() Added time validation to know if data needs to be refetched
         if (containerDetail.isVisible) {
             menuClick()
             showRefreshIcon()
