@@ -11,6 +11,7 @@ import com.arubianoch.posttest.R
 import com.arubianoch.posttest.ui.MainActivity
 import com.arubianoch.posttest.ui.adapter.CommentAdapter
 import com.arubianoch.posttest.ui.base.ScopedFragment
+import com.arubianoch.posttest.ui.user.UserFragment
 import kotlinx.android.synthetic.main.fragment_comments.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
