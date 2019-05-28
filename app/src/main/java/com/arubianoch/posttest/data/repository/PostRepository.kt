@@ -1,6 +1,7 @@
 package com.arubianoch.posttest.data.repository
 
 import androidx.lifecycle.LiveData
+import com.arubianoch.posttest.data.network.response.Comment
 import com.arubianoch.posttest.data.network.response.Post
 
 /**
@@ -19,4 +20,6 @@ interface PostRepository {
     suspend fun updatePostAsFavorite(postId: String, isFavorite: Boolean)
 
     suspend fun deletePostById(postId: String)
+
+    suspend fun getComments(postId: String): LiveData<List<Comment>>
 }
