@@ -80,7 +80,7 @@ class CommentFragment: ScopedFragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
         val postId = arguments?.getString("postId")
         commentViewModel = ViewModelProviders.of(
-            this@CommentFragment, commentFactory(postId!!)).get(CommentViewModel::class.java)
+            activity!!, commentFactory(postId!!)).get(CommentViewModel::class.java)
     }
 
     private fun bindUI() = launch {
