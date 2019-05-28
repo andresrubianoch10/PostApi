@@ -49,7 +49,7 @@ class UserFragment : ScopedFragment(), KodeinAware {
 
         val postId = arguments!!.getString("postId")
         userViewModel = ViewModelProviders.of(
-            this@UserFragment, userFactory(postId)
+            activity!!, userFactory(postId)
         ).get(UserViewModel::class.java)
     }
 
