@@ -42,7 +42,7 @@ The obvious purpose of MVVM pattern is abstraction of the View which reduces the
 The main folder contain an apk folder which inside of it you are going to see and APK file that could be install in any android device sdk version is major than 6.0 Mashmellow.
 
 ## Screenshots
-<img src="assets/ss-1.png" height="500"> <img src="assets/ss-2.png" height="500"> <img src="assets/ss-3.png" height="500"> 
+<img src="assets/ss-1.png" height="500"> <img src="assets/ss-3.png" height="500"> 
 <img src="assets/ss-4.png" height="500"> <img src="assets/ss-5.png" height="500"> 
 
 ## Dependencies
