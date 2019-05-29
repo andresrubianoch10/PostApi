@@ -42,19 +42,27 @@ The main folder contain an apk folder which inside of it you are going to see an
 
 ## Dependencies
 
-- Retrofit 2 [version: '2.4.0'](https://square.github.io/retrofit/)
-- OkHttp 3 [version: '3.4.1'](https://square.github.io/okhttp/)
-- AndroidX [version: '1.0.0'](https://mvnrepository.com/artifact/androidx)
-- Arch Lifecycle [version: '2.0.0'](https://developer.android.com/jetpack/androidx/releases/lifecycle)
-- Mockito [version: '2.27.0'](https://site.mockito.org/)
-- Arch Testing [version: '1.1.1'](https://mvnrepository.com/artifact/android.arch.core/core-testing?repo=google)
-- Kotlin Extension: [version: '1.0.0'](https://android.github.io/android-ktx/core-ktx/)
-- Kotlin Coroutines: [version:'1.0.0-RC1'](https://github.com/Kotlin/kotlinx.coroutines)
-- Gson: [version:'2.8.5'](https://github.com/google/gson)
-- Material Design: [version:'1.0.0'](https://github.com/material-components)
-- KodeIn: [version:'5.2.0'](https://github.com/Kodein-Framework/Kodein-DI)
-- Room: [version:'2.1.0-alpha01'](https://github.com/rom-rb/rom)
-- Three Ten Abp: [version:'1.1.0'](https://github.com/JakeWharton/ThreeTenABP)
+- Retrofit 2 [version: '2.4.0'](https://square.github.io/retrofit/): A type-safe HTTP client for Android and Java.
+
+- OkHttp 3 [version: '3.4.1'](https://square.github.io/okhttp/): An HTTP & HTTP/2 client for Android and Java applications.
+
+- AndroidX [version: '1.0.0'](https://mvnrepository.com/artifact/androidx): AndroidX is the open-source project that the Android team uses to develop, test, package, version and release libraries within Jetpack.
+
+- Arch Lifecycle [version: '2.0.0'](https://developer.android.com/jetpack/androidx/releases/lifecycle): Lifecycle-aware components perform actions in response to a change in the lifecycle status of another component, such as activities and fragments. These components help you produce better-organized, and often lighter-weight code, that is easier to maintain. See the reference docs for more information.
+
+- Mockito [version: '2.27.0'](https://site.mockito.org/): Mockito is a mocking framework that tastes really good. It lets you write beautiful tests with a clean & simple API.
+
+- Kotlin Coroutines: [version:'1.0.0-RC1'](https://github.com/Kotlin/kotlinx.coroutines): Library support for Kotlin coroutines with multiplatform support. 
+
+- Gson: [version:'2.8.5'](https://github.com/google/gson): Gson is a Java library that can be used to convert Java Objects into their JSON representation. It can also be used to convert a JSON string to an equivalent Java object.
+
+- Material Design: [version:'1.0.0'](https://github.com/material-components): Material Components for Android is a drop-in replacement for Android's Design Support Library.
+
+- KodeIn: [version:'5.2.0'](https://github.com/Kodein-Framework/Kodein-DI): Kodein is a very simple and yet very useful dependency retrieval container.
+
+- Room: [version:'2.1.0-alpha01'](https://github.com/rom-rb/rom): The Room persistence library provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
+
+- Three Ten Abp: [version:'1.1.0'](https://github.com/JakeWharton/ThreeTenABP): This library places the timezone information as a standard Android asset and provides a custom loader for parsing it efficiently.
 
 ## References
 
