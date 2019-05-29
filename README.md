@@ -37,6 +37,9 @@ The obvious purpose of MVVM pattern is abstraction of the View which reduces the
 - Similarly in bigger cases, it can be hard to design the ViewModel.
 - Debugging would be bit difficult when we have complex data bindings.
 
+## Running the app
+The main folder contain an apk folder which inside of it you are going to see and APK file that could be install in any android device sdk version is major than 6.0 Mashmellow.
+
 ## Dependencies
 
 - Retrofit 2 [version: '2.4.0'](https://square.github.io/retrofit/)
