@@ -17,6 +17,9 @@ interface PostDao {
     fun upsert(post: List<Post>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun refetchPost(post: List<Post>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun upsert(post: Post)
 
     @Query("SELECT * FROM post")

@@ -28,15 +28,19 @@ class CommentFragment: ScopedFragment(), KodeinAware {
     private var commentAdapter: CommentAdapter? = null
 
     private lateinit var commentViewModel: CommentViewModel
-//    private lateinit var postViewModel: PostViewModel
 
     companion object {
+
+        private const val POST_ID = "postId"
+        private const val DESCRIPTION = "description"
+        private const val USER_ID = "userId"
+
         fun newInstance(postId: String, description: String, userId: String) : CommentFragment {
             val fragment = CommentFragment()
             val args = Bundle()
-            args.putString("postId", postId)
-            args.putString("description", description)
-            args.putString("userId", userId)
+            args.putString(POST_ID, postId)
+            args.putString(DESCRIPTION, description)
+            args.putString(USER_ID, userId)
             fragment.arguments = args
             return fragment
         }
@@ -49,22 +53,30 @@ class CommentFragment: ScopedFragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        commentAdapter = CommentAdapter(activity!!)
+        initAdapter()
+        initRecyclerViewComponents()
+        setDescriptionInfo()
+        bindUI()
+        setUserInfo()
+    }
 
+    private fun initAdapter() {
+        commentAdapter = CommentAdapter(activity!!)
+    }
+
+    private fun initRecyclerViewComponents() {
         val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
         commentsContainer.adapter = commentAdapter
         commentsContainer.layoutManager = layoutManager
         val dividerItemDecoration = DividerItemDecoration(requireContext(),
             layoutManager.orientation)
         commentsContainer.addItemDecoration(dividerItemDecoration)
-
-        setDescription(arguments!!.getString("description"))
-        bindUI()
-        setUserInfo()
     }
 
+    private fun setDescriptionInfo() = setDescription(arguments!!.getString(DESCRIPTION))
+
     private fun setUserInfo() {
-        val userId = arguments!!.getString("userId")
+        val userId = arguments!!.getString(USER_ID)
 
         (activity as MainActivity).supportFragmentManager
             .beginTransaction()
@@ -78,9 +90,10 @@ class CommentFragment: ScopedFragment(), KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val postId = arguments?.getString("postId")
-        commentViewModel = ViewModelProviders.of(
-            activity!!, commentFactory(postId!!)).get(CommentViewModel::class.java)
+
+        val postId = arguments?.getString(POST_ID)
+        commentViewModel =
+            ViewModelProviders.of(activity!!, commentFactory(postId!!)).get(CommentViewModel::class.java)
     }
 
     private fun bindUI() = launch {

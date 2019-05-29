@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:text="@string/userNameText"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="@dimen/x_small_margin"
             tools:text="Name: Andres Rubiano Del Chiaro"/>
 
     <TextView
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
             tools:text="Email: andres.rubiano.ch@gmail.com"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="@dimen/x_small_margin"
             android:text="@string/userEmailText"/>
 
     <TextView
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/userPhoneText"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="@dimen/x_small_margin"
             tools:text="Phone: (304) 593 5556"/>
 
     <TextView
@@ -41,6 +41,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/userWebsiteText"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="@dimen/x_small_margin"
             tools:text="Website: https:www.andresrubianoch.com"/>
 </LinearLayout>

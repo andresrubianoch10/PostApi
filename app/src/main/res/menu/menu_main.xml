@@ -3,7 +3,7 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.arubianoch.test.ui.MainActivity">
 
-    <item android:id="@+id/action_settings"
+    <item android:id="@+id/refresh_info"
           android:title="@string/action_settings"
           android:orderInCategory="100"
           android:icon="@drawable/ic_sync_black_24dp"

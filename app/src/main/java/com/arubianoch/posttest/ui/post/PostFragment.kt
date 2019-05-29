@@ -27,7 +27,7 @@ import org.kodein.di.generic.instance
 class PostsFragment : ScopedFragment(), KodeinAware {
 
     companion object {
-        const val IS_FAVORITE = "isFavorite"
+        private const val IS_FAVORITE = "isFavorite"
 
         fun newInstance(isFavoriteView: Boolean): PostsFragment {
             val postsFragment = PostsFragment()
@@ -57,12 +57,11 @@ class PostsFragment : ScopedFragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val layoutManager = LinearLayoutManager(requireContext())
-        containerPost.adapter = adapter
-        containerPost.layoutManager = layoutManager
-        val dividerItemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
-        containerPost.addItemDecoration(dividerItemDecoration)
+        setUpRecycler()
+        setUpSwipeToDelete()
+    }
 
+    private fun setUpSwipeToDelete() {
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ) {
@@ -81,6 +80,14 @@ class PostsFragment : ScopedFragment(), KodeinAware {
         }).attachToRecyclerView(containerPost)
     }
 
+    private fun setUpRecycler() {
+        val layoutManager = LinearLayoutManager(requireContext())
+        containerPost.adapter = adapter
+        containerPost.layoutManager = layoutManager
+        val dividerItemDecoration = DividerItemDecoration(requireContext(), layoutManager.orientation)
+        containerPost.addItemDecoration(dividerItemDecoration)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -90,7 +97,7 @@ class PostsFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun bindUI() {
-        val isFavoriteView = arguments!!.getBoolean("isFavorite", false)
+        val isFavoriteView = arguments!!.getBoolean(IS_FAVORITE, false)
 
         if (isFavoriteView) {
             fetchFavoritePost()

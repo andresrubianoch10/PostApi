@@ -3,16 +3,17 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
-                                                   android:layout_height="48dp">
+                                                   android:layout_height="@dimen/default_button_size">
+
 
     <TextView
             android:id="@+id/textView_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:layout_marginBottom="@dimen/medium_margin"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
             android:visibility="gone"
             android:gravity="start|center_vertical"
@@ -26,15 +27,14 @@
 
     <ImageView
             android:id="@+id/imageview_status"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="@dimen/xx_medium_margin"
+            android:layout_height="@dimen/xx_medium_margin"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
             android:contentDescription="@null"
             android:gravity="start|center_vertical"
             android:visibility="invisible"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -42,11 +42,11 @@
 
     <ImageView
             android:id="@+id/postIsFavorite"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="@dimen/x_big_margin"
+            android:layout_height="@dimen/x_big_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:layout_marginBottom="@dimen/small_margin"
             android:contentDescription="@null"
             android:gravity="start|center_vertical"
             android:visibility="visible"

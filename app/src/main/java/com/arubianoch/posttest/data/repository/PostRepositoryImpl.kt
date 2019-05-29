@@ -28,7 +28,7 @@ class PostRepositoryImpl(
     private val userDataSource: UserDataSource
     ) : PostRepository {
 
-    private var lastFetchedTime: ZonedDateTime? = null
+    private var isRefetch: Boolean? = false
 
     init {
         postDataSource.apply {
@@ -52,6 +52,7 @@ class PostRepositoryImpl(
 
     override suspend fun getPosts(): LiveData<List<Post>> {
         return withContext(Dispatchers.IO) {
+            isRefetch = false
             val postFetched = postDao.getPost()
 
             if (postFetched == null || postFetched.value.isNullOrEmpty()) {
@@ -62,16 +63,21 @@ class PostRepositoryImpl(
     }
 
     private suspend fun initPostData() {
-        fetchPosts()
+        postDataSource.fetchPost()
     }
 
     override suspend fun fetchPosts() {
+        isRefetch = true
         postDataSource.fetchPost()
     }
 
     private fun persistFetchedPost(allPost: List<Post>?) {
         GlobalScope.launch(Dispatchers.IO) {
-            postDao.upsert(allPost!!)
+            if (isRefetch!!) {
+                postDao.refetchPost(allPost!!)
+            } else {
+                postDao.upsert(allPost!!)
+            }
         }
     }
 
@@ -136,8 +142,6 @@ class PostRepositoryImpl(
 
     override suspend fun deleteAllInfo() {
         GlobalScope.launch(Dispatchers.IO) {
-            userDao.deleteAllUsers()
-            commentDao.deleteAllComments()
             postDao.deleteAllPost()
         }
     }
