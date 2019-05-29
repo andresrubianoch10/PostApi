@@ -64,6 +64,9 @@ The main folder contain an apk folder which inside of it you are going to see an
 
 - Three Ten Abp: [version:'1.1.0'](https://github.com/JakeWharton/ThreeTenABP): This library places the timezone information as a standard Android asset and provides a custom loader for parsing it efficiently.
 
+## Testing
+The testing is pending to accomplish on this project.
+
 ## References
 
 - ViewModel https://developer.android.com/topic/libraries/architecture/viewmodel
