@@ -32,6 +32,11 @@ The obvious purpose of MVVM pattern is abstraction of the View which reduces the
 
 - It has also the ability to replace or add new pieces of code that do similar things into the right places in the architecture.
 
+## Disadvantages
+- Some people think that for simple UIs, MVVM can be overkill.
+- Similarly in bigger cases, it can be hard to design the ViewModel.
+- Debugging would be bit difficult when we have complex data bindings.
+
 ## Dependencies
 
 - Retrofit 2 [version: '2.4.0'](https://square.github.io/retrofit/)
@@ -58,6 +63,7 @@ The obvious purpose of MVVM pattern is abstraction of the View which reduces the
 - Unit Testing + Mockito + Kotlin + Architecture components https://medium.com/@marco_cattaneo/unit-testing-with-mockito-on-kotlin-android-project-with-architecture-components-2059eb637912
 - Junit + LiveData https://jeroenmols.com/blog/2019/01/17/livedatajunit5/
 - Eduardo Medina Github Account - MVVM project : https://github.com/emedinaa/kotlin-mvvm
+- MVVM Resources: https://www.tutorialspoint.com/mvvm/mvvm_advantages.htm 
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
