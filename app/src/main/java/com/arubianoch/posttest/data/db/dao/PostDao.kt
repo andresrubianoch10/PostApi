@@ -13,7 +13,7 @@ import com.arubianoch.posttest.data.network.response.Post
 @Dao
 interface PostDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun upsert(post: List<Post>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
