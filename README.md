@@ -2,7 +2,7 @@
 
 [![Kotlin](https://img.shields.io/badge/kotlin-1.3.30-blue.svg)](http://kotlinlang.org) [![Gradle](https://img.shields.io/badge/gradle-3.3.2-%2366DCB8.svg)](https://developer.android.com/studio/releases/gradle-plugin) [![Mockito](https://img.shields.io/badge/mockito-2.27.0-orange.svg)](https://site.mockito.org/)
 
-Repository focus on consume API about post, comments and user implementing Kotlin coroutines.
+Repository focus on consume API from [Json Placeholder](https://jsonplaceholder.typicode.com/) about post, comments and user implementing Kotlin coroutines. Throughout this project, other librarys also has been using; a section below describe better every library and his use on this.
 
 ## Architecture
 <img src="assets/mvvm-architecture.png" height="540">
