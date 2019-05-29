@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBar
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -39,25 +38,33 @@ class MainActivity : ScopedActivity(), KodeinAware, PostAdapter.OnItemClickListe
     private var menuPost: Menu? = null
     private var postSelected: Int? = null
 
+    companion object {
+        const val FRAGMENTS_PAGES = 2
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(toolbar)
-        // Create the adapter that will return a fragment for eachof the three
-        // primary sections of the activity.
+        initActionbar()
+        setUpPagerAdapter()
+
+        fab.setOnClickListener { onDeleteAllEntriesClick() }
+    }
+
+    private fun setUpPagerAdapter() {
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
-        // Set up the ViewPager with the sections adapter.
         container.adapter = mSectionsPagerAdapter
 
         tab_layout.setupWithViewPager(container)
-        tab_layout.getTabAt(0)?.text = "ALL"
-        tab_layout.getTabAt(1)?.text = "FAVORITES"
+        tab_layout.getTabAt(0)?.text = getString(R.string.tab_text_1)
+        tab_layout.getTabAt(1)?.text = getString(R.string.tab_text_2)
+    }
 
-        fab.setOnClickListener { onDeleteAllEntriesClick() }
+    private fun initActionbar() {
+        setSupportActionBar(toolbar)
 
-        setSupportActionBar(findViewById<View>(R.id.toolbar) as Toolbar)
         mMenuDrawable = getDrawable(R.drawable.ic_menu_animatable) as AnimatedVectorDrawable
         mBackDrawable = getDrawable(R.drawable.ic_back_animatable) as AnimatedVectorDrawable
         supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_TITLE
@@ -86,46 +93,53 @@ class MainActivity : ScopedActivity(), KodeinAware, PostAdapter.OnItemClickListe
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
-        if (id == R.id.action_settings) {
-            viewModel.refetchPosts()
-            return true
+        when (id) {
+            R.id.refresh_info -> refetchPost()
+            R.id.empty_star -> {
+                showFullStar()
+                setAsFavoritePost()
+            }
+            R.id.full_star -> {
+                removeAsFavoritePost()
+                showEmptyStar()
+            }
+            android.R.id.home -> {
+                menuClick()
+                showRefreshIcon()
+            }
+            else -> return super.onOptionsItemSelected(item)
         }
+        return true
+    }
 
-        if (id == R.id.empty_star) {
-            showFullStar()
-            viewModel.setFavoritePost(postSelected.toString())
-            return true
-        } else if (id == R.id.full_star) {
-            viewModel.setUnFavoritePost(postSelected.toString())
-            showEmptyStar()
-            return true
-        }
+    private fun removeAsFavoritePost() {
+        viewModel.setUnFavoritePost(postSelected.toString())
+    }
 
-        if (item.itemId == android.R.id.home) {
-            menuClick()
-            showRefreshIcon()
-            return true
-        }
+    private fun setAsFavoritePost() {
+        viewModel.setFavoritePost(postSelected.toString())
+    }
 
-        return super.onOptionsItemSelected(item)
+    private fun refetchPost() {
+        viewModel.refetchPosts()
     }
 
     private fun showRefreshIcon() {
         menuPost!!.findItem(R.id.full_star).isVisible = false
         menuPost!!.findItem(R.id.empty_star).isVisible = false
-        menuPost!!.findItem(R.id.action_settings).isVisible = true
+        menuPost!!.findItem(R.id.refresh_info).isVisible = true
     }
 
     private fun showEmptyStar() {
         menuPost!!.findItem(R.id.full_star).isVisible = false
         menuPost!!.findItem(R.id.empty_star).isVisible = true
-        menuPost!!.findItem(R.id.action_settings).isVisible = false
+        menuPost!!.findItem(R.id.refresh_info).isVisible = false
     }
 
     private fun showFullStar() {
         menuPost!!.findItem(R.id.full_star).isVisible = true
         menuPost!!.findItem(R.id.empty_star).isVisible = false
-        menuPost!!.findItem(R.id.action_settings).isVisible = false
+        menuPost!!.findItem(R.id.refresh_info).isVisible = false
     }
 
     private fun menuClick() {
@@ -168,20 +182,27 @@ class MainActivity : ScopedActivity(), KodeinAware, PostAdapter.OnItemClickListe
         }
 
         override fun getCount(): Int {
-            return 2
+            return FRAGMENTS_PAGES
         }
-
-
     }
 
     override fun onItemClicked(itemView: Post) {
-        itemView.isRead = true
-        viewModel.updatePost(itemView)
+        postAsReadUpdate(itemView)
+        changeFavoriteIcon(itemView.isFavorite)
+        setCurrentPost(itemView.id)
+        openNewContainer(itemView)
+        showContainerDetail()
+    }
 
-        postSelected = itemView.id
+    private fun setCurrentPost(id: Int) {
+        postSelected = id
+    }
 
-        if (itemView.isFavorite) showFullStar() else showEmptyStar()
+    private fun changeFavoriteIcon(isFavorite: Boolean) {
+        if (isFavorite) showFullStar() else showEmptyStar()
+    }
 
+    private fun openNewContainer(itemView: Post) {
         this@MainActivity.supportFragmentManager
             .beginTransaction()
             .replace(
@@ -189,7 +210,12 @@ class MainActivity : ScopedActivity(), KodeinAware, PostAdapter.OnItemClickListe
                 CommentFragment.newInstance(itemView.id.toString(), itemView.body, itemView.userId.toString())
             )
             .commit()
-
-        showContainerDetail()
     }
+
+    private fun postAsReadUpdate(itemView: Post) {
+        itemView.isRead = true
+        viewModel.updatePost(itemView)
+    }
+
+    override fun onBackPressed() = if (containerDetail.isVisible) hideContainerDetail() else super.onBackPressed()
 }

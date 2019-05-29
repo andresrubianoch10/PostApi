@@ -25,10 +25,12 @@ class UserFragment : ScopedFragment(), KodeinAware {
     private lateinit var userViewModel: UserViewModel
 
     companion object {
+        private const val POST_ID = "postId"
+
         fun newInstance(postId: String): UserFragment {
             val fragment = UserFragment()
             val args = Bundle()
-            args.putString("postId", postId)
+            args.putString(POST_ID, postId)
             fragment.arguments = args
             return fragment
         }
@@ -47,16 +49,14 @@ class UserFragment : ScopedFragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val postId = arguments!!.getString("postId")
-        userViewModel = ViewModelProviders.of(
-            activity!!, userFactory(postId)
-        ).get(UserViewModel::class.java)
+        val postId = arguments!!.getString(POST_ID)
+        userViewModel = ViewModelProviders.of(activity!!, userFactory(postId)).get(UserViewModel::class.java)
     }
 
     private fun bindUI() = launch {
         val users = userViewModel.user.await()
 
-        users.observe(this@UserFragment, Observer {
+        users.observe(activity!!, Observer {
             if (it == null) {
                 userEmail.text = ""
                 userWebsite.text = ""
