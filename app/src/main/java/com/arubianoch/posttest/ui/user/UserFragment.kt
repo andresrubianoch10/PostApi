@@ -56,7 +56,7 @@ class UserFragment : ScopedFragment(), KodeinAware {
     private fun bindUI() = launch {
         val users = userViewModel.user.await()
 
-        users.observe(activity!!, Observer {
+        users.observe(this@UserFragment, Observer {
             if (it == null) {
                 userEmail.text = ""
                 userWebsite.text = ""
