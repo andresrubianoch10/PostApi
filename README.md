@@ -1,6 +1,7 @@
-# Posts Api
-
 [![Kotlin](https://img.shields.io/badge/kotlin-1.3.30-blue.svg)](http://kotlinlang.org) [![Gradle](https://img.shields.io/badge/gradle-3.3.2-%2366DCB8.svg)](https://developer.android.com/studio/releases/gradle-plugin) [![Mockito](https://img.shields.io/badge/mockito-2.27.0-orange.svg)](https://site.mockito.org/)
+
+# Posts Api - MVVM + Coroutines + Kodein (DI)
+<img src="assets/MVVM-Image.png">
 
 Repository focus on consume API from [Json Placeholder](https://jsonplaceholder.typicode.com/) about post, comments and user implementing Kotlin coroutines and MVVM Architecture. Throughout this project, other librarys also has been using; a section below describe better every library and his use on this.
 
@@ -40,6 +41,10 @@ The obvious purpose of MVVM pattern is abstraction of the View which reduces the
 ## Running the app
 The main folder contain an apk folder which inside of it you are going to see and APK file that could be install in any android device sdk version is major than 6.0 Mashmellow.
 
+## Screenshots
+<img src="assets/ss-1.png" height="500"> <img src="assets/ss-3.png" height="500"></br> 
+<img src="assets/ss-4.png" height="500"> <img src="assets/ss-5.png" height="500"> 
+
 ## Dependencies
 
 - Retrofit 2 [version: '2.4.0'](https://square.github.io/retrofit/): A type-safe HTTP client for Android and Java.
@@ -65,7 +70,10 @@ The main folder contain an apk folder which inside of it you are going to see an
 - Three Ten Abp: [version:'1.1.0'](https://github.com/JakeWharton/ThreeTenABP): This library places the timezone information as a standard Android asset and provides a custom loader for parsing it efficiently.
 
 ## Testing
-The testing is pending to accomplish on this project.
+[Pending]
+
+## Animation
+[Pending]
 
 ## References
 
