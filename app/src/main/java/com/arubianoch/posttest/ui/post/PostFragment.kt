@@ -50,7 +50,6 @@ class PostsFragment : ScopedFragment(), KodeinAware {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         adapter = PostAdapter(activity!!, (activity!! as MainActivity))
-        retainInstance = true
         return view
     }
 
@@ -109,7 +108,7 @@ class PostsFragment : ScopedFragment(), KodeinAware {
     private fun fetchNormalPost() = launch {
         val post = viewModel.posts.await()
 
-        post.observe(activity!!, Observer {
+        post.observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {
                 adapter!!.cleanData()
             } else {
@@ -121,7 +120,7 @@ class PostsFragment : ScopedFragment(), KodeinAware {
     private fun fetchFavoritePost() = launch {
         val post = viewModel.favoritePost.await()
 
-        post.observe(activity!!, Observer {
+        post.observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {
                 adapter!!.cleanData()
             } else {
