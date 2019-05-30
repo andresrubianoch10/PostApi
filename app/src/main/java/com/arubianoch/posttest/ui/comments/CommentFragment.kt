@@ -21,7 +21,7 @@ import org.kodein.di.generic.factory
 /**
  * @author Andres Rubiano Del Chiaro
  */
-class CommentFragment: ScopedFragment(), KodeinAware {
+class CommentFragment : ScopedFragment(), KodeinAware {
 
     override val kodein by closestKodein()
     private val commentFactory: ((String) -> CommentViewModelFactory) by factory()
@@ -35,7 +35,7 @@ class CommentFragment: ScopedFragment(), KodeinAware {
         private const val DESCRIPTION = "description"
         private const val USER_ID = "userId"
 
-        fun newInstance(postId: String, description: String, userId: String) : CommentFragment {
+        fun newInstance(postId: String, description: String, userId: String): CommentFragment {
             val fragment = CommentFragment()
             val args = Bundle()
             args.putString(POST_ID, postId)
@@ -50,13 +50,22 @@ class CommentFragment: ScopedFragment(), KodeinAware {
         return inflater.inflate(R.layout.fragment_comments, container, false)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val postId = arguments?.getString(POST_ID)
+        commentViewModel =
+            ViewModelProviders.of(this@CommentFragment, commentFactory(postId!!)).get(CommentViewModel::class.java)
+
+        bindUI()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initAdapter()
         initRecyclerViewComponents()
         setDescriptionInfo()
-        bindUI()
         setUserInfo()
     }
 
@@ -68,8 +77,10 @@ class CommentFragment: ScopedFragment(), KodeinAware {
         val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
         commentsContainer.adapter = commentAdapter
         commentsContainer.layoutManager = layoutManager
-        val dividerItemDecoration = DividerItemDecoration(requireContext(),
-            layoutManager.orientation)
+        val dividerItemDecoration = DividerItemDecoration(
+            requireContext(),
+            layoutManager.orientation
+        )
         commentsContainer.addItemDecoration(dividerItemDecoration)
     }
 
@@ -88,18 +99,10 @@ class CommentFragment: ScopedFragment(), KodeinAware {
         postDescription.text = description
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        val postId = arguments?.getString(POST_ID)
-        commentViewModel =
-            ViewModelProviders.of(activity!!, commentFactory(postId!!)).get(CommentViewModel::class.java)
-    }
-
     private fun bindUI() = launch {
         val comments = commentViewModel.comments.await()
 
-        comments.observe(this@CommentFragment, Observer {
+        comments.observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {
                 commentAdapter!!.cleanData()
             } else {
