@@ -40,23 +40,19 @@ class UserFragment : ScopedFragment(), KodeinAware {
         return inflater.inflate(R.layout.fragment_user_info, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        bindUI()
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         val postId = arguments!!.getString(POST_ID)
-        userViewModel = ViewModelProviders.of(activity!!, userFactory(postId)).get(UserViewModel::class.java)
+        userViewModel = ViewModelProviders.of(this@UserFragment, userFactory(postId)).get(UserViewModel::class.java)
+
+        bindUI()
     }
 
     private fun bindUI() = launch {
         val users = userViewModel.user.await()
 
-        users.observe(this@UserFragment, Observer {
+        users.observe(viewLifecycleOwner, Observer {
             if (it == null) {
                 userEmail.text = ""
                 userWebsite.text = ""
