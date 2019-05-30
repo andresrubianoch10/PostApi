@@ -50,6 +50,8 @@ class MainActivity : ScopedActivity(), KodeinAware, PostAdapter.OnItemClickListe
         setUpPagerAdapter()
 
         fab.setOnClickListener { onDeleteAllEntriesClick() }
+
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(PostViewModel::class.java)
     }
 
     private fun setUpPagerAdapter() {
@@ -74,12 +76,6 @@ class MainActivity : ScopedActivity(), KodeinAware, PostAdapter.OnItemClickListe
 
     private fun onDeleteAllEntriesClick() {
         viewModel.deleteAllInfo()
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(PostViewModel::class.java)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
